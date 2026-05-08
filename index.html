@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hanqun Cao — AI for Science & Protein Design</title>
+<meta name="description" content="Hanqun Cao is a third-year PhD student at CUHK and visiting researcher at UPenn Medicine, working on AI-driven protein design and antibiotic discovery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --serif: 'EB Garamond', 'Georgia', serif;
+  --sans: 'Manrope', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', 'Menlo', monospace;
+  --ink: #1c1917; --ink-2: #44403c; --ink-3: #78716c; --ink-4: #a8a29e;
+  --bg: #fafaf9; --bg-2: #f5f5f4; --bg-3: #e7e5e4;
+  --accent: #1d4ed8; --accent-hover: #1e40af; --accent-bg: #eff6ff;
+  --warm: #c2410c; --warm-bg: #fff7ed;
+  --green: #15803d; --green-bg: #f0fdf4;
+  --purple: #7e22ce; --purple-bg: #faf5ff;
+  --border: #d6d3d1; --radius: 6px;
+  --max-w: 820px; --transition: 0.2s ease;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #fafaf9; --ink-2: #d6d3d1; --ink-3: #a8a29e; --ink-4: #78716c;
+    --bg: #1c1917; --bg-2: #292524; --bg-3: #44403c;
+    --accent: #60a5fa; --accent-hover: #93bbfd; --accent-bg: #172554;
+    --warm: #fb923c; --warm-bg: #431407;
+    --green: #4ade80; --green-bg: #052e16;
+    --purple: #c084fc; --purple-bg: #3b0764;
+    --border: #44403c;
+  }
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { font-family: var(--sans); color: var(--ink); background: var(--bg); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+::selection { background: rgba(29,78,216,0.15); }
+a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--accent-hover); }
+.wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
+nav { position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); border-bottom: 1px solid var(--border); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.nav-name { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); letter-spacing: -0.3px; }
+.nav-links { display: flex; gap: 6px; }
+.nav-links a { font-size: 12.5px; font-weight: 600; color: var(--ink-3); letter-spacing: 0.5px; text-transform: uppercase; padding: 6px 10px; border-radius: var(--radius); transition: all var(--transition); }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); background: var(--bg-2); }
+.hero { padding: 72px 0 56px; border-bottom: 1px solid var(--border); }
+.hero-grid { display: grid; grid-template-columns: 148px 1fr; gap: 36px; align-items: start; }
+.hero-photo { width: 148px; height: 148px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); flex-shrink: 0; }
+.hero-name { font-family: var(--serif); font-size: 38px; font-weight: 700; letter-spacing: -0.8px; line-height: 1.15; color: var(--ink); }
+.hero-name .alt { color: var(--ink-3); font-weight: 400; font-size: 24px; margin-left: 4px; }
+.hero-role { font-size: 15px; color: var(--ink-2); margin-top: 6px; font-weight: 400; line-height: 1.5; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 14px; }
+.hero-meta a { font-size: 13px; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 5px; padding: 4px 0; }
+.hero-meta a svg { width: 14px; height: 14px; flex-shrink: 0; }
+section { padding: 48px 0; }
+section + section { border-top: 1px solid var(--border); }
+.sec-title { font-family: var(--serif); font-size: 26px; font-weight: 600; margin-bottom: 20px; letter-spacing: -0.3px; }
+.about-text { color: var(--ink-2); font-size: 15px; line-height: 1.75; }
+.about-text p + p { margin-top: 12px; }
+.about-text strong { color: var(--ink); font-weight: 600; }
+.news-list { display: flex; flex-direction: column; }
+.news-item { display: grid; grid-template-columns: 80px 1fr; gap: 12px; padding: 10px 0; }
+.news-date { font-family: var(--mono); font-size: 11.5px; color: var(--ink-4); padding-top: 2px; }
+.news-body { font-size: 14px; color: var(--ink-2); }
+.news-body strong { color: var(--ink); }
+.pill { display: inline-block; font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; padding: 1px 6px; border-radius: 3px; margin-right: 4px; vertical-align: 1px; }
+.pill-blue { background: var(--accent-bg); color: var(--accent); }
+.pub-controls { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+.pub-btn { font-family: var(--sans); font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 100px; border: 1px solid var(--border); background: transparent; color: var(--ink-3); cursor: pointer; transition: all var(--transition); }
+.pub-btn:hover { border-color: var(--ink-3); color: var(--ink-2); }
+.pub-btn.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.pub-group-label { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px dashed var(--border); }
+.pub-group-label:first-of-type { margin-top: 0; }
+.pub-entry { padding: 12px 0; border-bottom: 1px solid color-mix(in srgb, var(--border) 40%, transparent); }
+.pub-entry:last-child { border-bottom: none; }
+.pub-title-text { font-weight: 600; font-size: 14.5px; color: var(--ink); line-height: 1.4; margin-bottom: 2px; }
+.pub-authors { font-size: 12.5px; color: var(--ink-3); line-height: 1.5; }
+.pub-authors .me { color: var(--ink); font-weight: 700; }
+.pub-venue-line { font-size: 12.5px; color: var(--accent); font-weight: 600; margin-top: 2px; }
+.venue-tag { display: inline-block; font-size: 9.5px; font-weight: 700; padding: 1px 5px; border-radius: 3px; margin-right: 3px; vertical-align: 1px; }
+.vt-pub { background: var(--accent-bg); color: var(--accent); }
+.vt-pre { background: var(--warm-bg); color: var(--warm); }
+.vt-ws { background: var(--purple-bg); color: var(--purple); }
+.vt-pat { background: var(--green-bg); color: var(--green); }
+.pub-note { font-size: 12px; color: var(--warm); font-weight: 500; margin-top: 2px; }
+.pub-links { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px; }
+.pub-links a { font-size: 11px; font-weight: 600; color: var(--ink-3); padding: 2px 8px; border: 1px solid var(--border); border-radius: 4px; transition: all var(--transition); }
+.pub-links a:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.exp-item { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent); }
+.exp-item:last-child { border-bottom: none; }
+.exp-date { font-family: var(--mono); font-size: 11.5px; color: var(--ink-4); padding-top: 3px; }
+.exp-title { font-weight: 600; font-size: 14.5px; color: var(--ink); }
+.exp-org { font-size: 13.5px; color: var(--ink-2); }
+.exp-desc { font-size: 12.5px; color: var(--ink-3); margin-top: 3px; }
+footer { padding: 32px 0; text-align: center; border-top: 1px solid var(--border); color: var(--ink-4); font-size: 12.5px; }
+@media (max-width: 700px) {
+  .hero-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .hero-photo { width: 120px; height: 120px; }
+  .hero-meta { justify-content: center; }
+  .exp-item { grid-template-columns: 1fr; gap: 2px; }
+  .nav-links a { padding: 6px 6px; font-size: 11px; }
+}
+@media (max-width: 420px) { .hero-name { font-size: 30px; } .hero-name .alt { font-size: 20px; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.hero { animation: fadeIn 0.5s ease-out; }
+section { animation: fadeIn 0.4s ease-out both; }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap nav-inner">
+  <a href="#" class="nav-name">Hanqun Cao</a>
+  <div class="nav-links"><a href="#about">About</a><a href="#news">News</a><a href="#pubs">Papers</a><a href="#exp">CV</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap"><div class="hero-grid">
+  <img src="hanqun.png" class="hero-photo" alt="Hanqun Cao">
+  <div>
+    <h1 class="hero-name">Hanqun Cao<span class="alt">(Hank)</span></h1>
+    <p class="hero-role">Third-year Ph.D. Student, Computer Science &amp; Engineering, CUHK<br>Visiting Researcher, Perelman School of Medicine, UPenn</p>
+    <div class="hero-meta">
+      <a href="mailto:hanquncao@gmail.com"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="M2 4l8 6 8-6"/></svg>hanquncao@gmail.com</a>
+      <a href="https://scholar.google.com/citations?user=czD8vBsAAAAJ" target="_blank"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2L2 7l3 1.5V14c0 2.2 2.2 4 5 4s5-1.8 5-4V8.5L18 7l-8-5zm0 12.5c-1.7 0-3-.9-3-2s1.3-2 3-2 3 .9 3 2-1.3 2-3 2z"/></svg>Scholar</a>
+      <a href="https://github.com/chq1155" target="_blank"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5a8.5 8.5 0 00-2.69 16.56c.43.08.58-.18.58-.4v-1.51c-2.38.52-2.89-1.01-2.89-1.01-.39-.99-.95-1.25-.95-1.25-.78-.53.06-.52.06-.52.86.06 1.31.88 1.31.88.76 1.31 2 .93 2.49.71.08-.55.3-.93.54-1.15-1.9-.22-3.9-.95-3.9-4.24 0-.94.34-1.7.88-2.3-.09-.22-.38-1.09.08-2.27 0 0 .72-.23 2.35.88a8.2 8.2 0 014.28 0c1.63-1.11 2.35-.88 2.35-.88.46 1.18.17 2.05.08 2.27.55.6.88 1.36.88 2.3 0 3.3-2.01 4.02-3.92 4.23.31.27.58.79.58 1.59v2.36c0 .23.15.49.59.4A8.5 8.5 0 0010 1.5z"/></svg>GitHub</a>
+    </div>
+  </div>
+</div></div></header>
+
+<section id="about"><div class="wrap">
+  <h2 class="sec-title">About</h2>
+  <div class="about-text">
+    <p>I am a third-year Ph.D. student in the <strong>Department of Computer Science and Engineering</strong> at <strong>The Chinese University of Hong Kong</strong>, advised by <strong><a href="https://www.cse.cuhk.edu.hk/people/faculty/pheng-ann-heng/" target="_blank">Prof. Pheng-Ann Heng</a></strong>. I am currently a visiting researcher at the <strong>University of Pennsylvania Perelman School of Medicine</strong>, working with <strong><a href="https://delafuentelab.seas.upenn.edu/" target="_blank">Prof. Cesar de la Fuente-Nunez</a></strong> in the Machine Biology Group.</p>
+    <p>My research develops <strong>deep generative models</strong> and <strong>reinforcement learning</strong> methods for <strong>biomolecular design</strong>. I build AI systems that design functional proteins, antimicrobial peptides, RNA, and small molecules &mdash; and validate them experimentally.</p>
+    <p>I hold a <strong>B.Sc. in Mathematics</strong> from CUHK, <strong>2 US patents</strong>, and have published in <strong>Nature Machine Intelligence</strong>, <strong>Nature Computational Science</strong>, <strong>IEEE TKDE</strong>, <strong>NeurIPS</strong>, <strong>ICLR</strong>, <strong>ICML</strong>, <strong>ICCV</strong>, and <strong>MICCAI</strong>.</p>
+  </div>
+</div></section>
+
+<section id="news"><div class="wrap">
+  <h2 class="sec-title">News</h2>
+  <div class="news-list">
+    <div class="news-item"><span class="news-date">2026.05</span><span class="news-body"><span class="pill pill-blue">Accepted</span>3 first/co-first author papers accepted by <strong>ICML 2026</strong>.</span></div>
+  </div>
+</div></section>
+
+<section id="pubs"><div class="wrap">
+  <h2 class="sec-title">Publications</h2>
+  <p style="font-size:13px;color:var(--ink-3);margin-bottom:16px;">Full list on <a href="https://scholar.google.com/citations?user=czD8vBsAAAAJ" target="_blank">Google Scholar</a>. &ensp;* equal contribution &ensp;# corresponding author &ensp;<strong style="color:var(--ink)">Hanqun Cao</strong> in bold.</p>
+  <div class="pub-controls">
+    <button class="pub-btn on" onclick="filterP('all',this)">All</button>
+    <button class="pub-btn" onclick="filterP('first',this)">First / co-first</button>
+    <button class="pub-btn" onclick="filterP('published',this)">Published</button>
+    <button class="pub-btn" onclick="filterP('preprint',this)">Preprints</button>
+  </div>
+  <div id="pub-list">
+
+  <div class="pub-group-label">Published</div>
+
+  <div class="pub-entry" data-t="first published"><div class="pub-title-text">A survey on generative diffusion models</div><div class="pub-authors"><span class="me">Hanqun Cao</span>, Cheng Tan, Zhangyang Gao, Yilun Xu, Guangyong Chen, Pheng-Ann Heng, Stan Z. Li</div><div class="pub-venue-line"><span class="venue-tag vt-pub">TKDE</span>IEEE Trans. Knowledge and Data Engineering, 2024</div><div class="pub-note">300+ citations</div><div class="pub-links"><a href="https://arxiv.org/abs/2209.02646">Paper</a><a href="https://github.com/chq1155/A-Survey-on-Generative-Diffusion-Model">GitHub</a></div></div>
+
+  <div class="pub-entry" data-t="first published"><div class="pub-title-text">GLID&sup2;E: a gradient-free lightweight fine-tune approach for discrete biological sequence design</div><div class="pub-authors"><span class="me">Hanqun Cao</span>, Haosen Shi, Chenyu Wang, Sinno Jialin Pan, Pheng-Ann Heng</div><div class="pub-venue-line"><span class="venue-tag vt-pub">NeurIPS 2025</span></div></div>
+
+  <div class="pub-entry" data-t="first published"><div class="pub-title-text">SAGEPhos: sage bio-coupled and augmented fusion for phosphorylation site detection</div><div class="pub-authors">Jingjie Zhang*, <span class="me">Hanqun Cao*</span>, Zijun Gao, Xiaorui Wang, Chunbin Gu</div><div class="pub-venue-line"><span class="venue-tag vt-pub">ICLR 2025</span></div></div>
+
+  <div class="pub-entry" data-t="first published"><div class="pub-title-text">Microbial primer: artificial intelligence for microbiologists</div><div class="pub-authors"><span class="me">Hanqun Cao</span>, Cesar de la Fuente-Nunez</div><div class="pub-venue-line"><span class="venue-tag vt-pub">Published</span>Microbiology, 171(11), 2025</div></div>
+
+  <div class="pub-entry" data-t="published"><div class="pub-title-text">ResGen is a pocket-aware 3D molecular generation model based on parallel multiscale modelling</div><div class="pub-authors">Odin Zhang, ..., <span class="me">Hanqun Cao</span>, ..., et al.</div><div class="pub-venue-line"><span class="venue-tag vt-pub">Nat. Mach. Intell.</span>Nature Machine Intelligence, 5(9), 2023</div></div>
+
+  <div class="pub-entry" data-t="published"><div class="pub-title-text">Efficient and accurate large library ligand docking with KarmaDock</div><div class="pub-authors">Xujun Zhang, ..., <span class="me">Hanqun Cao</span>, ..., et al.</div><div class="pub-venue-line"><span class="venue-tag vt-pub">Nat. Comput. Sci.</span>Nature Computational Science, 3(9), 2023</div></div>
+
+  <div class="pub-entry" data-t="published"><div class="pub-title-text">Deciphering RNA secondary structure prediction: a probabilistic K-rook matching perspective</div><div class="pub-authors">Cheng Tan, Zhangyang Gao, <span class="me">Hanqun Cao</span>, Xingran Chen, et al.</div><div class="pub-venue-line"><span class="venue-tag vt-pub">ICML 2024</span></div></div>
+
+  <div class="pub-entry" data-t="published"><div class="pub-title-text">ChemMiner: a large language model agent system for chemical literature data mining</div><div class="pub-authors">Kexin Chen, ..., <span class="me">Hanqun Cao</span>, ..., Pheng-Ann Heng</div><div class="pub-venue-line"><span class="venue-tag vt-pub">ICCV 2025</span></div></div>
+
+  <div class="pub-entry" data-t="published"><div class="pub-title-text">R3Design: deep tertiary structure-based RNA sequence design and beyond</div><div class="pub-authors">Cheng Tan, ..., <span class="me">Hanqun Cao</span>, ..., Stan Z. Li</div><div class="pub-venue-line"><span class="venue-tag vt-pub">BIB</span>Briefings in Bioinformatics, 26(1), 2025</div></div>
+
+  <div class="pub-entry" data-t="published"><div class="pub-title-text">Gated-GPS: enhancing protein&ndash;protein interaction site prediction</div><div class="pub-authors">Xin Gao, <span class="me">Hanqun Cao</span>, Jinpeng Li, Jiezhong Qiu, Guangyong Chen, Pheng-Ann Heng</div><div class="pub-venue-line"><span class="venue-tag vt-pub">BIB</span>Briefings in Bioinformatics, 26(3), 2025</div></div>
+
+  <div class="pub-entry" data-t="published"><div class="pub-title-text">Learning robust classifier for imbalanced medical image dataset with noisy labels by minimizing invariant risk</div><div class="pub-authors">Jinpeng Li, <span class="me">Hanqun Cao</span>, Jiaze Wang, Furui Liu, Qi Dou, Guangyong Chen, Pheng-Ann Heng</div><div class="pub-venue-line"><span class="venue-tag vt-pub">MICCAI 2023</span></div></div>
+
+  <div class="pub-entry" data-t="published"><div class="pub-title-text">Fast non-Markovian diffusion model for weakly supervised anomaly detection in brain MR images</div><div class="pub-authors">Jinpeng Li, <span class="me">Hanqun Cao</span>, Jiaze Wang, Qi Dou, Guangyong Chen, Pheng-Ann Heng</div><div class="pub-venue-line"><span class="venue-tag vt-pub">MICCAI 2023</span></div></div>
+
+  <div class="pub-entry" data-t="first published"><div class="pub-title-text">PLAME: lightweight MSA design advances protein folding from evolutionary embeddings</div><div class="pub-authors"><span class="me">Hanqun Cao</span>, Xinyi Zhou, Zijun Gao, ..., Ge Liu, Pheng-Ann Heng</div><div class="pub-venue-line"><span class="venue-tag vt-ws">NeurIPS '25 WS</span>AI for Science</div><div class="pub-note">1000&times; speedup &middot; improves AF2/AF3 on low-homology proteins</div></div>
+
+  <div class="pub-entry" data-t="published"><div class="pub-title-text">MSAFlow: a unified approach for MSA representation, augmentation, and family-based protein design</div><div class="pub-authors">Anirudh Venkatraman, <span class="me">Hanqun Cao</span>, Tong Wei, Chaoran Cheng, Ge Liu</div><div class="pub-venue-line"><span class="venue-tag vt-ws">NeurIPS '25 WS</span>AI for Science</div></div>
+
+  <div class="pub-group-label">Preprints &amp; under review</div>
+
+  <div class="pub-entry" data-t="first preprint"><div class="pub-title-text">A deep reinforcement learning platform for antibiotic discovery</div><div class="pub-authors"><span class="me">Hanqun Cao</span>, Marcelo D.T. Torres, Jingjie Zhang, Zijun Gao, Fang Wu, Chunbin Gu, Jure Leskovec, Yejin Choi, Cesar de la Fuente-Nunez, Guangyong Chen, Pheng-Ann Heng</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>bioRxiv, 2025</div><div class="pub-links"><a href="https://arxiv.org/abs/2509.18153">arXiv</a><a href="https://www.biorxiv.org/content/10.1101/2025.09.23.678086v1">bioRxiv</a></div></div>
+
+  <div class="pub-entry" data-t="first preprint"><div class="pub-title-text">From supervision to exploration: what does protein language model learn during reinforcement learning?</div><div class="pub-authors"><span class="me">Hanqun Cao</span>, Hongrui Zhang, Junde Xu, Zhou Zhang, ..., Jinbo Xu, Wu-Jun Li, Pheng-Ann Heng</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>arXiv:2510.01571</div></div>
+
+  <div class="pub-entry" data-t="first preprint"><div class="pub-title-text">TD3B: transition-directed discrete diffusion for allosteric binder generation</div><div class="pub-authors"><span class="me">Hanqun Cao</span>, Aastha Pal, Sophia Tang, Yinuo Zhang, Jingjie Zhang, Pheng-Ann Heng, Pranam Chatterjee</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Manuscript</span>2026</div></div>
+
+  <div class="pub-entry" data-t="first preprint"><div class="pub-title-text">DEL-Ranking: ranking-correction denoising framework for elucidating molecular affinities in DNA-encoded libraries</div><div class="pub-authors"><span class="me">Hanqun Cao</span>, Mutian He, Ning Ma, Chang-Yu Hsieh, Chunbin Gu, Pheng-Ann Heng</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>arXiv:2410.14946</div></div>
+
+  <div class="pub-entry" data-t="first preprint"><div class="pub-title-text">RiboPO: preference optimization for structure- and stability-aware RNA design</div><div class="pub-authors">Minghao Sun*, <span class="me">Hanqun Cao*</span>, Zhou Zhang*, et al.</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>arXiv:2510.21161</div></div>
+
+  <div class="pub-entry" data-t="first preprint"><div class="pub-title-text">InstructPLM: aligning protein language models to follow protein structure instructions</div><div class="pub-authors">Jiezhong Qiu*, Junde Xu*, Jie Hu*, <span class="me">Hanqun Cao*</span>, et al.</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>bioRxiv, 2024</div><div class="pub-links"><a href="https://www.biorxiv.org/content/10.1101/2024.04.17.589642v1">bioRxiv</a></div></div>
+
+  <div class="pub-entry" data-t="first preprint"><div class="pub-title-text">Learning the PTM code through a coarse-to-fine, mechanism-aware framework</div><div class="pub-authors">Jingjie Zhang*, <span class="me">Hanqun Cao*</span>, Zijun Gao, ..., Chang-Yu Hsieh, Chunbin Gu</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>arXiv:2510.23492</div></div>
+
+  <div class="pub-entry" data-t="first preprint"><div class="pub-title-text">Bi-TEAM: a unified cross-scale representation learning framework for chemically modified biomolecules</div><div class="pub-authors">Chunbin Gu*, Zijun Gao*, ..., <span class="me">Hanqun Cao#</span>, Jiajun Bu#, Chang-Yu Hsieh#</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>arXiv:2603.01873, 2026</div><div class="pub-note">Corresponding author</div></div>
+
+  <div class="pub-entry" data-t="preprint"><div class="pub-title-text">Lost in tokenization: context as the key to unlocking biomolecular understanding in scientific LLMs</div><div class="pub-authors">Kai Zhuang, ..., <span class="me">Hanqun Cao</span>, ..., Pheng-Ann Heng</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>arXiv:2510.23127</div></div>
+
+  <div class="pub-entry" data-t="preprint"><div class="pub-title-text">Unlocking potential binders: multimodal pretraining DEL-fusion for denoising DNA-encoded libraries</div><div class="pub-authors">Chunbin Gu, Mutian He, <span class="me">Hanqun Cao</span>, Guangyong Chen, Chang-Yu Hsieh, Pheng-Ann Heng</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>arXiv:2409.05916</div></div>
+
+  <div class="pub-entry" data-t="preprint"><div class="pub-title-text">ODesign: a world model for biomolecular interaction design</div><div class="pub-authors">Odin Zhang, ..., <span class="me">Hanqun Cao</span>, ..., et al.</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>arXiv:2510.22304</div></div>
+
+  <div class="pub-entry" data-t="preprint"><div class="pub-title-text">CONFIDE: hallucination assessment for reliable biomolecular structure prediction and design</div><div class="pub-authors">Zijun Gao, ..., <span class="me">Hanqun Cao</span>, ..., Chunbin Gu</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>arXiv:2512.02033</div></div>
+
+  <div class="pub-entry" data-t="preprint"><div class="pub-title-text">Designing AI-programmable therapeutics with the EDEN family of foundation models</div><div class="pub-authors">Geraldene Munsamy, ..., <span class="me">Hanqun Cao</span>, ..., et al.</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>bioRxiv, 2026</div></div>
+
+  <div class="pub-entry" data-t="preprint"><div class="pub-title-text">Deep learning-based quasi-conformal surface registration for partial 3D faces</div><div class="pub-authors">Yuchen Guo, <span class="me">Hanqun Cao</span>, Lok Ming Lui</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Preprint</span>arXiv:2405.09880</div></div>
+
+  <div class="pub-entry" data-t="preprint"><div class="pub-title-text">Position: the hidden costs and measurement gaps of reinforcement learning with verifiable rewards</div><div class="pub-authors">Aaron Tu, ..., <span class="me">Hanqun Cao</span>, ..., et al.</div><div class="pub-venue-line"><span class="venue-tag vt-pre">Position</span>arXiv:2509.21882</div></div>
+
+  <div class="pub-group-label">US patents</div>
+
+  <div class="pub-entry" data-t="first patent"><div class="pub-title-text">Protein inverse folding method based on multi-modal pretrained large model</div><div class="pub-authors">Pheng-Ann Heng, Guangyong Chen, Jiezhong Qiu, <span class="me">Hanqun Cao</span>, Junde Xu</div><div class="pub-venue-line"><span class="venue-tag vt-pat">US Patent</span>App. 18/425,749 (2025)</div></div>
+
+  <div class="pub-entry" data-t="first patent"><div class="pub-title-text">Design method of functional proteins using protein large language model fine-tuning technology</div><div class="pub-authors">Pheng-Ann Heng, Guangyong Chen, <span class="me">Hanqun Cao</span></div><div class="pub-venue-line"><span class="venue-tag vt-pat">US Patent</span>App. 18/636,388 (2025)</div></div>
+
+  </div>
+</div></section>
+
+<section id="exp"><div class="wrap">
+  <h2 class="sec-title">Education &amp; Experience</h2>
+  <div class="exp-item"><span class="exp-date">Jun 2025 &ndash;<br>Aug 2026</span><div><div class="exp-title">Visiting Researcher</div><div class="exp-org">University of Pennsylvania, Perelman School of Medicine</div><div class="exp-desc">Machine Biology Group &middot; Host: Prof. Cesar de la Fuente-Nunez &middot; AI-driven antibiotic discovery</div></div></div>
+  <div class="exp-item"><span class="exp-date">Aug 2023 &ndash;<br>Jul 2027</span><div><div class="exp-title">Ph.D. in Computer Science &amp; Engineering</div><div class="exp-org">The Chinese University of Hong Kong</div><div class="exp-desc">Advisor: Prof. Pheng-Ann Heng &middot; Protein design, generative models, RL for biology</div></div></div>
+  <div class="exp-item"><span class="exp-date">Sep 2019 &ndash;<br>Jul 2023</span><div><div class="exp-title">B.Sc. in Mathematics</div><div class="exp-org">The Chinese University of Hong Kong</div><div class="exp-desc">SURP &amp; UROP research scholarships &middot; FYP with Prof. Ronald Lui</div></div></div>
+  <div class="exp-item"><span class="exp-date">Aug 2021 &ndash;<br>Jun 2022</span><div><div class="exp-title">Research Assistant</div><div class="exp-org">CUHK CSE, Prof. Yu Li</div><div class="exp-desc">Protein structural design with score-based diffusion models</div></div></div>
+  <div class="exp-item"><span class="exp-date">May 2021 &ndash;<br>Sep 2021</span><div><div class="exp-title">Summer Research</div><div class="exp-org">CUHK Mathematics, Prof. Jun Zou</div><div class="exp-desc">Inverse problems in elastic wave scattering (FEM)</div></div></div>
+</div></section>
+
+<footer><div class="wrap">&copy; 2026 Hanqun Cao &ensp;&middot;&ensp; Last updated May 2026</div></footer>
+
+<script>
+const secs=document.querySelectorAll('section[id]'),navA=document.querySelectorAll('.nav-links a');
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))})},{rootMargin:'-30% 0px -60% 0px'});
+secs.forEach(s=>obs.observe(s));
+function filterP(cat,btn){document.querySelectorAll('.pub-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.querySelectorAll('.pub-entry').forEach(p=>{p.style.display=(cat==='all'||p.dataset.t.includes(cat))?'':'none'});document.querySelectorAll('.pub-group-label').forEach(l=>{if(cat==='all'){l.style.display='';return}let n=l.nextElementSibling,vis=false;while(n&&!n.classList.contains('pub-group-label')){if(n.classList.contains('pub-entry')&&n.style.display!=='none')vis=true;n=n.nextElementSibling}l.style.display=vis?'':'none'})}
+</script>
+</body>
+</html>
